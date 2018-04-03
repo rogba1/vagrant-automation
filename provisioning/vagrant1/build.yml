@@ -1,0 +1,73 @@
+---
+- name: Build Docker images from Dockerfiles.
+  docker_image:
+    name: "{{ item.name }}"
+    tag: "{{ item.tag }}"
+    path: "/vagrant/projects/test2/provisioner/provisioning/vagrant1/{{ item.directory }}"
+
+    state: build
+
+  with_items:
+
+    - { name: jenkins, tag: “build”, directory: jenkins }
+
+    - { name: sonarqube, tag: “analysis”, directory: sonarqube }
+
+    - { name: selenium, tag: “test”, directory: selenium }
+
+
+
+# Data containers don't need to be running to be utilized.
+
+- name: Run a Selenium container.
+
+  docker_container:
+
+    image: selenium:test
+
+    name: selenium
+
+    state: present
+
+
+
+- name: Run a Jenkins container.
+
+  docker_container:
+
+    image: jenkins:build
+
+    name: jenkins
+
+    state: started
+
+
+
+
+
+
+
+- name: Run a SonarQube container.
+
+  docker_container:
+
+    image: sonarqube:analysis
+
+    name: sonarqube
+
+    state: started
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
