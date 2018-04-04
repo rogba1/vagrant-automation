@@ -3,7 +3,7 @@
   docker_image:
     name: "{{ item.name }}"
     tag: "{{ item.tag }}"
-    path: "/vagrant/projects/test2/provisioner/provisioning/vagrant1/{{ item.directory }}"
+    path: "/vagrant/projects/vagrant-automation/provisioner/provisioning/vagrant1/{{ item.directory }}"
 
     state: build
 
